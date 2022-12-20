@@ -46,8 +46,8 @@ function App() {
           <div className="general-info-container">
             Block Number: {blockNumber}
           </div>
-          <LatestTransactions />
           <LatestBlocks />
+          <LatestTransactions />
         </div>
       </div>
       <footer>Made with ❤ by santipu</footer>
