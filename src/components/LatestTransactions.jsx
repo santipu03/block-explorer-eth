@@ -1,48 +1,21 @@
-function LatestTransactions() {
+function LatestTransactions(latestTx) {
   return (
     <div className="tx-container">
       <div className="card-header">Latest Transactions</div>
       <div className="row-container">
-        <div className="row">
-          <div>0xc5c8718ea7c...</div>
-          <div>
-            <div>From 0x690b9a9e9...</div>
-            <div>To 0x4675c7e5...</div>
-          </div>
-          <div>0.07813 Eth</div>
-        </div>
-        <div className="row">
-          <div>0xc5c8718ea7c...</div>
-          <div>
-            <div>From 0x690b9a9e9...</div>
-            <div>To 0x4675c7e5...</div>
-          </div>
-          <div>0.07813 Eth</div>
-        </div>
-        <div className="row">
-          <div>0xc5c8718ea7c...</div>
-          <div>
-            <div>From 0x690b9a9e9...</div>
-            <div>To 0x4675c7e5...</div>
-          </div>
-          <div>0.07813 Eth</div>
-        </div>
-        <div className="row">
-          <div>0xc5c8718ea7c...</div>
-          <div>
-            <div>From 0x690b9a9e9...</div>
-            <div>To 0x4675c7e5...</div>
-          </div>
-          <div>0.07813 Eth</div>
-        </div>
-        <div className="row">
-          <div>0xc5c8718ea7c...</div>
-          <div>
-            <div>From 0x690b9a9e9...</div>
-            <div>To 0x4675c7e5...</div>
-          </div>
-          <div>0.07813 Eth</div>
-        </div>
+        {console.log(latestTx.latestTx)}
+        {latestTx.latestTx.map((tx, i) => {
+          return (
+            <div className="row" key={i}>
+              <div>{tx.hash.substring(0, 11)}...</div>
+              <div>
+                <div>From {tx.from.substring(0, 11)}...</div>
+                <div>To {tx.to.substring(0, 11)}...</div>
+              </div>
+              <div>{(tx.value.toString() / 10 ** 18).toFixed(4)} ETH</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

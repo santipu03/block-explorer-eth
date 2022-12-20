@@ -20,7 +20,7 @@ const alchemy = new Alchemy(settings);
 
 function App() {
   const [blockNumber, setBlockNumber] = useState();
-  const [latestTx, setLatestTx] = useState();
+  const [latestTx, setLatestTx] = useState([]);
 
   async function getBlockNumber() {
     setBlockNumber(await alchemy.core.getBlockNumber());
@@ -47,7 +47,7 @@ function App() {
             Block Number: {blockNumber}
           </div>
           <LatestBlocks />
-          <LatestTransactions />
+          <LatestTransactions latestTx={latestTx} />
         </div>
       </div>
       <footer>Made with ❤ by santipu</footer>
