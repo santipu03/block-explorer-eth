@@ -8,13 +8,16 @@ function LatestTransactions(latestTxs) {
             <div className="row" key={i}>
               <div>{tx.hash.substring(0, 11)}...</div>
               <div>
-                <div>From {tx.from.substring(0, 11)}...</div>
+                <div>
+                  From{" "}
+                  <span className="link">{tx.from.substring(0, 11)}...</span>
+                </div>
                 <div>
                   To{" "}
                   {tx.to === null ? (
-                    <div>0x000000000</div>
+                    <div className="link">0x000000000</div>
                   ) : (
-                    tx.to.substring(0, 11)
+                    <span className="link">{tx.to.substring(0, 11)}</span>
                   )}
                   ...
                 </div>

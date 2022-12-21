@@ -49,6 +49,7 @@ footer {
 
 .block-container {
   border: 2px solid black;
+  overflow: scroll;
 }
 
 .card-header {
@@ -70,4 +71,8 @@ footer {
   padding: 10px;
   height: 80px;
   border: 2px solid black;
+}
+
+.link {
+  color: #1e40af;
 }

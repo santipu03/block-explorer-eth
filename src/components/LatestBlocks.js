@@ -1,33 +1,20 @@
-function LatestBlocks() {
+function LatestBlocks(latestBlocks) {
   return (
     <div className="block-container">
       <div className="card-header">Latest Blocks</div>
       <div className="row-container">
-        <div className="row">
-          <div>16227078</div>
-          <div>Fee Recipient: builder0x69</div>
-          <div>0.03517 Eth</div>
-        </div>
-        <div className="row">
-          <div>16227078</div>
-          <div>Fee Recipient: builder0x69</div>
-          <div>0.03517 Eth</div>
-        </div>
-        <div className="row">
-          <div>16227078</div>
-          <div>Fee Recipient: builder0x69</div>
-          <div>0.03517 Eth</div>
-        </div>
-        <div className="row">
-          <div>16227078</div>
-          <div>Fee Recipient: builder0x69</div>
-          <div>0.03517 Eth</div>
-        </div>
-        <div className="row">
-          <div>16227078</div>
-          <div>Fee Recipient: builder0x69</div>
-          <div>0.03517 Eth</div>
-        </div>
+        {latestBlocks.latestBlocks.map((block, i) => {
+          return (
+            <div className="row" key={i}>
+              <div className="link">{block.number}</div>
+              <div>
+                Miner:{" "}
+                <span className="link">{block.miner.substring(0, 11)}...</span>
+              </div>
+              <div>{block.transactions.length} txns</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
