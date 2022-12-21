@@ -14,37 +14,15 @@ const alchemy = new Alchemy(settings);
 
 function App() {
   const [blockNumber, setBlockNumber] = useState();
-  const [latestTxs, setLatestTxs] = useState([]);
-  const [latestBlocks, setLatestBlocks] = useState([]);
-  const [fetchBlockStatus, setFetchBlockStatus] = useState(false);
-
-  async function getBlockNumber() {
-    setBlockNumber(await alchemy.core.getBlockNumber());
-    if (blockNumber && !fetchBlockStatus) {
-      let blocksArray = [];
-      for (let i = 0; i < 10; i++) {
-        const latestBlock = await alchemy.core.getBlock(blockNumber - i);
-        blocksArray.push(latestBlock);
-      }
-      setLatestBlocks(blocksArray);
-      setFetchBlockStatus(true);
-    }
-  }
-
-  async function getLastBlock() {
-    const latestBlock = await alchemy.core.getBlockWithTransactions(
-      blockNumber
-    );
-    setLatestTxs(latestBlock.transactions.slice(0, 10));
-  }
 
   useEffect(() => {
-    getLastBlock();
+    const fetchData = async () => {
+      const block = await alchemy.core.getBlockNumber();
+      setBlockNumber(block);
+    };
+
+    fetchData();
   }, []);
-
-  useEffect(() => {
-    getBlockNumber();
-  });
 
   return (
     <div className="App">
@@ -54,8 +32,12 @@ function App() {
           <div className="general-info-container">
             Block Number: {blockNumber}
           </div>
-          <LatestBlocks latestBlocks={latestBlocks} />
-          <LatestTransactions latestTxs={latestTxs} />
+          {blockNumber && (
+            <>
+              <LatestBlocks block={blockNumber} />{" "}
+              <LatestTransactions block={blockNumber} />
+            </>
+          )}
         </div>
       </div>
       <footer>Made with ❤ by santipu</footer>

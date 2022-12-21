@@ -1,9 +1,33 @@
-function LatestTransactions(latestTxs) {
+import { useEffect, useState } from "react";
+import { Alchemy, Network } from "alchemy-sdk";
+
+const settings = {
+  apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
+  network: Network.ETH_MAINNET,
+};
+
+const alchemy = new Alchemy(settings);
+
+function LatestTransactions(block) {
+  const [txs, setLatestTxs] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const latestBlock = await alchemy.core.getBlockWithTransactions(
+        block.block
+      );
+      console.log(latestBlock);
+      setLatestTxs(latestBlock.transactions.slice(0, 10));
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="tx-container">
       <div className="card-header">Latest Transactions</div>
       <div className="row-container">
-        {latestTxs.latestTxs.map((tx, i) => {
+        {txs?.map((tx, i) => {
           return (
             <div className="row" key={i}>
               <div>{tx.hash.substring(0, 11)}...</div>
@@ -22,7 +46,12 @@ function LatestTransactions(latestTxs) {
                   ...
                 </div>
               </div>
-              <div>{(tx.value.toString() / 10 ** 18).toFixed(4)} ETH</div>
+              <div>
+                {tx.value.toString() !== "0"
+                  ? (tx.value.toString() / 10 ** 18).toFixed(5)
+                  : tx.value.toString() / 10 ** 18}{" "}
+                ETH
+              </div>
             </div>
           );
         })}
