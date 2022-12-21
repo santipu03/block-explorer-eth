@@ -22,7 +22,7 @@ function LatestBlocks(block) {
     };
 
     fetchData();
-  }, []);
+  }, [block.block]);
 
   return (
     <div className="block-container">

@@ -21,7 +21,7 @@ function LatestTransactions(block) {
     };
 
     fetchData();
-  }, []);
+  }, [block.block]);
 
   return (
     <div className="tx-container">
@@ -46,7 +46,7 @@ function LatestTransactions(block) {
                   ...
                 </div>
               </div>
-              <div>
+              <div className="value">
                 {tx.value.toString() !== "0"
                   ? (tx.value.toString() / 10 ** 18).toFixed(5)
                   : tx.value.toString() / 10 ** 18}{" "}

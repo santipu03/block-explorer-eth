@@ -29,9 +29,6 @@ function App() {
       <header>Ethereum Block Explorer</header>
       <div className="body">
         <div className="info-container">
-          <div className="general-info-container">
-            Block Number: {blockNumber}
-          </div>
           {blockNumber && (
             <>
               <LatestBlocks block={blockNumber} />{" "}
