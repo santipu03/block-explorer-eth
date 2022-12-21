@@ -10,33 +10,41 @@ const settings = {
   network: Network.ETH_MAINNET,
 };
 
-// In this week's lessons we used ethers.js. Here we are using the
-// Alchemy SDK is an umbrella library with several different packages.
-//
-// You can read more about the packages here:
-//   https://docs.alchemy.com/reference/alchemy-sdk-api-surface-overview#api-surface
-
 const alchemy = new Alchemy(settings);
 
 function App() {
   const [blockNumber, setBlockNumber] = useState();
-  const [latestTx, setLatestTx] = useState([]);
+  const [latestTxs, setLatestTxs] = useState([]);
+  const [latestBlocks, setLatestBlocks] = useState([]);
+  const [fetchBlockStatus, setFetchBlockStatus] = useState(false);
 
   async function getBlockNumber() {
     setBlockNumber(await alchemy.core.getBlockNumber());
+    if (blockNumber && !fetchBlockStatus) {
+      let blocksArray = [];
+      for (let i = 0; i < 10; i++) {
+        const latestBlock = await alchemy.core.getBlock(blockNumber - i);
+        blocksArray.push(latestBlock);
+      }
+      setLatestBlocks(blocksArray);
+      setFetchBlockStatus(true);
+    }
   }
 
-  async function getLatestBlock() {
+  async function getLastBlock() {
     const latestBlock = await alchemy.core.getBlockWithTransactions(
       blockNumber
     );
-    setLatestTx(latestBlock.transactions.slice(0, 10));
+    setLatestTxs(latestBlock.transactions.slice(0, 10));
   }
 
   useEffect(() => {
-    getBlockNumber();
-    getLatestBlock();
+    getLastBlock();
   }, []);
+
+  useEffect(() => {
+    getBlockNumber();
+  });
 
   return (
     <div className="App">
@@ -46,8 +54,8 @@ function App() {
           <div className="general-info-container">
             Block Number: {blockNumber}
           </div>
-          <LatestBlocks />
-          <LatestTransactions latestTx={latestTx} />
+          <LatestBlocks latestBlocks={latestBlocks} />
+          <LatestTransactions latestTxs={latestTxs} />
         </div>
       </div>
       <footer>Made with ❤ by santipu</footer>
