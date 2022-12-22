@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function LatestBlocks({ block, alchemy }) {
-  const [blocks, setLatestBlocks] = useState([]);
+  const [blocks, setLatestBlocks] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,22 +21,26 @@ function LatestBlocks({ block, alchemy }) {
     <div className="latest-container">
       <div className="card-header">Latest Blocks</div>
       <div className="row-container">
-        {blocks?.map((block, i) => {
-          return (
-            <div className="row" key={i}>
-              <div className="link">{block.number}</div>
-              <div>
-                Miner:{" "}
-                <Link to={"accounts/" + block.miner}>
-                  <span className="link">
-                    {block.miner.substring(0, 11)}...
-                  </span>
-                </Link>
+        {blocks ? (
+          blocks.map((block, i) => {
+            return (
+              <div className="row" key={i}>
+                <div className="link">{block.number}</div>
+                <div>
+                  Miner:{" "}
+                  <Link to={"accounts/" + block.miner}>
+                    <span className="link">
+                      {block.miner.substring(0, 11)}...
+                    </span>
+                  </Link>
+                </div>
+                <div>{block.transactions.length} txns</div>
               </div>
-              <div>{block.transactions.length} txns</div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div className="row">Loading...</div>
+        )}
       </div>
     </div>
   );
