@@ -26,9 +26,9 @@ function Transaction({ alchemy }) {
   return (
     <div>
       {!tx ? (
-        <div className="tx-container">Loading...</div>
+        <div className="single-tx-container">Loading...</div>
       ) : (
-        <div className="tx-container">
+        <div className="single-tx-container">
           <h2>Transaction Details</h2>
           <div>Hash: {tx.transactionHash}</div>
           <div>

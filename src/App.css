@@ -58,11 +58,16 @@ footer {
   height: 630px;
 }
 
-.tx-container {
+.single-tx-container {
   border: 2px solid black;
   padding: 20px;
   min-height: 650px;
   overflow-wrap: break-word;
+}
+
+.txns-container {
+  overflow-y: scroll;
+  border: 2px solid black;
 }
 
 .block-container {
@@ -111,6 +116,7 @@ footer {
   flex-direction: column;
   gap: 10px;
   padding: 10px;
+  max-height: 700px;
 }
 
 .row {
@@ -123,7 +129,7 @@ footer {
 }
 
 .value {
-  width: 140px;
+  width: 160px;
   text-align: right;
 }
 

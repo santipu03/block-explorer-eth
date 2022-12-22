@@ -39,7 +39,11 @@ function Block({ blockNumber, alchemy }) {
           <Link to={"/block/" + (block.number + 1)}>
             <button>Next</button>
           </Link>
-          <div>Fee Recipient {block.miner}</div>
+          <div>
+            Fee Recipient{" "}
+            <Link to={"/accounts/" + block.miner}>{block.miner}</Link>
+          </div>
+          <div>Timestamp {block.timestamp}</div>
           <div>Gas Used: {block.gasUsed.toString()}</div>
           <div>Gas Limit: {block.gasLimit.toString()} </div>
           <div>
@@ -47,7 +51,10 @@ function Block({ blockNumber, alchemy }) {
             {Utils.formatEther(block.baseFeePerGas.toString())} ETH
           </div>
           <div>Hash: {block.hash}</div>
-          <div>Parent Hash: {block.parentHash}</div>
+          <div>
+            Parent Hash:{" "}
+            <Link to={"/block/" + (block.number - 1)}>{block.parentHash}</Link>
+          </div>
           <div className="log-hash" onClick={(e) => toggleTx(e)}>
             Transactions: {block.transactions.length}
           </div>
