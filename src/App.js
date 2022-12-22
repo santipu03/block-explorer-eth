@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Main from "./components/Main";
 import Account from "./components/Account";
+import Transaction from "./components/Transaction";
 
 import "./App.css";
 
@@ -43,11 +44,11 @@ function App() {
                 setBlock={setBlock}
               />
             }
-          />
+          />*/}
           <Route
             path="/transactions/:url"
-            element={<OneTransaction alchemy={alchemy} />}
-          /> */}
+            element={<Transaction alchemy={alchemy} />}
+          />
           <Route
             path="/accounts/:url"
             element={<Account alchemy={alchemy} />}

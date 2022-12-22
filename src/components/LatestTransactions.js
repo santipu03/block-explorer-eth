@@ -14,13 +14,15 @@ function LatestTransactions({ block, alchemy }) {
   }, [alchemy.core, block]);
 
   return (
-    <div className="tx-container">
+    <div className="latest-container">
       <div className="card-header">Latest Transactions</div>
       <div className="row-container">
         {txs?.map((tx, i) => {
           return (
             <div className="row" key={i}>
-              <div>{tx.hash.substring(0, 11)}...</div>
+              <Link to={"/transactions/" + tx.hash}>
+                <div>{tx.hash.substring(0, 11)}...</div>
+              </Link>
               <div>
                 <div>
                   From{" "}

@@ -18,7 +18,7 @@ function LatestBlocks({ block, alchemy }) {
   }, [alchemy.core, block]);
 
   return (
-    <div className="block-container">
+    <div className="latest-container">
       <div className="card-header">Latest Blocks</div>
       <div className="row-container">
         {blocks?.map((block, i) => {

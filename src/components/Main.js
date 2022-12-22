@@ -11,7 +11,7 @@ function Main({ blockNumber, alchemy, setBlockNumber }) {
     };
 
     fetchData();
-  }, []);
+  }, [alchemy.core, setBlockNumber]);
 
   return (
     <div className="info-container">
