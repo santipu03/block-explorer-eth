@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function LatestBlocks({ block, alchemy }) {
   const [blocks, setLatestBlocks] = useState([]);
@@ -26,7 +27,11 @@ function LatestBlocks({ block, alchemy }) {
               <div className="link">{block.number}</div>
               <div>
                 Miner:{" "}
-                <span className="link">{block.miner.substring(0, 11)}...</span>
+                <Link to={"accounts/" + block.miner}>
+                  <span className="link">
+                    {block.miner.substring(0, 11)}...
+                  </span>
+                </Link>
               </div>
               <div>{block.transactions.length} txns</div>
             </div>
