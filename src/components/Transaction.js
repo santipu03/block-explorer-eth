@@ -14,7 +14,7 @@ function Transaction({ alchemy }) {
     fetchData();
   }, [alchemy.core, url]);
 
-  function openLog(e) {
+  function toogleLog(e) {
     const collapsible = e.target.nextElementSibling;
     if (collapsible.style.display === "flex") {
       collapsible.style.display = "none";
@@ -53,7 +53,7 @@ function Transaction({ alchemy }) {
               tx.logs.map((log, i) => {
                 return (
                   <div key={i} className="log-item">
-                    <div onClick={(e) => openLog(e)} className="log-hash">
+                    <div onClick={(e) => toogleLog(e)} className="log-hash">
                       + &nbsp;&nbsp;Log Index: {log.logIndex}
                     </div>
                     <div className="collapsible">
