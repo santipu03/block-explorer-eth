@@ -10,16 +10,17 @@ header {
   height: 100px;
   background-color: #fef3c7;
   display: flex;
-  padding-left: 85px;
+  padding-left: 60px;
   font-weight: bold;
   font-size: 2rem;
   align-items: center;
 }
 
 .body {
-  height: calc(100vh - 160px);
+  min-height: calc(100vh - 160px);
   display: flex;
   flex-direction: column;
+  padding: 60px;
 }
 
 footer {
@@ -33,21 +34,48 @@ footer {
 .info-container {
   height: 70%;
   display: flex;
-  justify-content: space-around;
-  padding: 40px;
+  justify-content: space-between;
   gap: 20px;
+}
+
+.latest-container {
+  border: 2px solid black;
+  overflow: scroll;
+  width: 45%;
 }
 
 .tx-container {
   border: 2px solid black;
-  overflow: scroll;
-  width: 45%;
+  padding: 20px;
+  min-height: 650px;
 }
 
-.block-container {
+.logs-container {
   border: 2px solid black;
-  overflow: scroll;
-  width: 45%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+
+.log-item {
+}
+
+.log-hash {
+  background-color: #d9f99d;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.collapsible {
+  display: none;
+  padding: 10px;
+  overflow: hidden;
+  background-color: lightgrey;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .card-header {
