@@ -1,6 +1,6 @@
 import { Utils } from "alchemy-sdk";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function Transaction({ alchemy }) {
   const { url } = useParams();
@@ -29,10 +29,23 @@ function Transaction({ alchemy }) {
         <div className="tx-container">Loading...</div>
       ) : (
         <div className="tx-container">
-          <h2>Tx: {tx.transactionHash}</h2>
-          <div>From: {tx.from}</div>
-          <div>To: {tx.to}</div>
+          <h2>Transaction Details</h2>
           <div>Hash: {tx.transactionHash}</div>
+          <div>
+            From: <Link to={"/accounts/" + tx.from}>{tx.from}</Link>
+          </div>
+          <div>
+            To: <Link to={"/accounts/" + tx.to}>{tx.to}</Link>
+          </div>
+          <div>
+            Block: <Link to={"/block/" + tx.blockNumber}>{tx.blockNumber}</Link>
+          </div>
+          <div>
+            Status:{" "}
+            {tx.status === 1 ? <span>Success</span> : <span>Pending...</span>}
+          </div>
+          <div>Confirmations: {tx.confirmations}</div>
+
           <h3>Gas</h3>
           <div>Gas Used: {Utils.formatEther(tx.gasUsed.toString())} ETH</div>
           <div>
@@ -43,10 +56,7 @@ function Transaction({ alchemy }) {
             Effective Gas Price:{" "}
             {Utils.formatEther(tx.effectiveGasPrice.toString())} ETH
           </div>
-          <h3>Block</h3>
-          <div>Block Hash: {tx.blockHash}</div>
-          <div>Block Number: {tx.blockNumber}</div>
-          <div>Confirmations: {tx.confirmations}</div>
+
           <h3>Logs</h3>
           <div className="logs-container">
             {tx.logs.length > 0 ? (
@@ -79,12 +89,6 @@ function Transaction({ alchemy }) {
               <div>No Logs</div>
             )}
           </div>
-          <h3>Other</h3>
-          <div>Status: {tx.status}</div>
-          <div>Transaction Index: {tx.transactionIndex}</div>
-          <div>Type: {tx.type}</div>
-
-          {console.log(tx)}
         </div>
       )}
     </div>

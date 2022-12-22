@@ -21,7 +21,9 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Link to={"/"}>Ethereum Block Explorer</Link>
+        <Link to={"/"} className="title">
+          Ethereum Block Explorer
+        </Link>
       </header>
       <div className="body">
         <Routes>
