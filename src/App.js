@@ -1,9 +1,10 @@
 import { Alchemy, Network } from "alchemy-sdk";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Main from "./components/Main";
+import Account from "./components/Account";
 
 import "./App.css";
-import LatestTransactions from "./components/LatestTransactions";
-import LatestBlocks from "./components/LatestBlocks";
 
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
@@ -15,27 +16,43 @@ const alchemy = new Alchemy(settings);
 function App() {
   const [blockNumber, setBlockNumber] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const block = await alchemy.core.getBlockNumber();
-      setBlockNumber(block);
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <div className="App">
-      <header>Ethereum Block Explorer</header>
+      <header>
+        <Link to={"/"}>Ethereum Block Explorer</Link>
+      </header>
       <div className="body">
-        <div className="info-container">
-          {blockNumber && (
-            <>
-              <LatestBlocks block={blockNumber} alchemy={alchemy} />{" "}
-              <LatestTransactions block={blockNumber} alchemy={alchemy} />
-            </>
-          )}
-        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main
+                blockNumber={blockNumber}
+                alchemy={alchemy}
+                setBlockNumber={setBlockNumber}
+              />
+            }
+          />
+          {/* <Route
+            path="/block/:url"
+            element={
+              <OneBlock
+                blockNumber={blockNumber}
+                alchemy={alchemy}
+                block={block}
+                setBlock={setBlock}
+              />
+            }
+          />
+          <Route
+            path="/transactions/:url"
+            element={<OneTransaction alchemy={alchemy} />}
+          /> */}
+          <Route
+            path="/accounts/:url"
+            element={<Account alchemy={alchemy} />}
+          />
+        </Routes>
       </div>
       <footer>Made with ❤ by santipu</footer>
     </div>
