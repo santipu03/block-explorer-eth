@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Main from "./components/Main";
 import Account from "./components/Account";
 import Transaction from "./components/Transaction";
+import Block from "./components/Block";
 
 import "./App.css";
 
@@ -34,17 +35,10 @@ function App() {
               />
             }
           />
-          {/* <Route
+          <Route
             path="/block/:url"
-            element={
-              <OneBlock
-                blockNumber={blockNumber}
-                alchemy={alchemy}
-                block={block}
-                setBlock={setBlock}
-              />
-            }
-          />*/}
+            element={<Block blockNumber={blockNumber} alchemy={alchemy} />}
+          />
           <Route
             path="/transactions/:url"
             element={<Transaction alchemy={alchemy} />}

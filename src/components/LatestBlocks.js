@@ -25,7 +25,9 @@ function LatestBlocks({ block, alchemy }) {
           blocks.map((block, i) => {
             return (
               <div className="row" key={i}>
-                <div className="link">{block.number}</div>
+                <Link to={"/block/" + block.number}>
+                  <div className="link">{block.number}</div>
+                </Link>
                 <div>
                   Miner:{" "}
                   <Link to={"accounts/" + block.miner}>
