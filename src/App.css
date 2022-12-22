@@ -42,6 +42,7 @@ footer {
   border: 2px solid black;
   overflow: scroll;
   width: 45%;
+  height: 630px;
 }
 
 .tx-container {
@@ -51,10 +52,8 @@ footer {
 }
 
 .logs-container {
-  border: 2px solid black;
   display: flex;
   flex-direction: column;
-  padding: 10px;
   gap: 10px;
 }
 
@@ -73,7 +72,6 @@ footer {
   overflow: hidden;
   background-color: lightgrey;
   overflow-wrap: break-word;
-  display: flex;
   flex-direction: column;
   gap: 10px;
 }

@@ -54,12 +54,10 @@ function Transaction({ alchemy }) {
                 return (
                   <div key={i} className="log-item">
                     <div onClick={(e) => openLog(e)} className="log-hash">
-                      + &nbsp;&nbsp;Hash: {log.transactionHash}
+                      + &nbsp;&nbsp;Log Index: {log.logIndex}
                     </div>
                     <div className="collapsible">
                       <div>Adress: {log.address}</div>
-                      <div>Log Index: {log.logIndex}</div>
-                      <div>Transaction Index: {log.transactionIndex}</div>
                       <div>Data: {log.data}</div>
                       <div>
                         Topics:{" "}
