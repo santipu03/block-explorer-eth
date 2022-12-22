@@ -40,7 +40,7 @@ footer {
 
 .latest-container {
   border: 2px solid black;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 45%;
   height: 630px;
 }
@@ -49,6 +49,7 @@ footer {
   border: 2px solid black;
   padding: 20px;
   min-height: 650px;
+  overflow-wrap: break-word;
 }
 
 .block-container {
@@ -80,6 +81,11 @@ footer {
   overflow-wrap: break-word;
   flex-direction: column;
   gap: 10px;
+}
+
+.tx-item {
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
 }
 
 .card-header {

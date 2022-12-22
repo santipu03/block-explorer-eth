@@ -29,7 +29,7 @@ function Transaction({ alchemy }) {
         <div className="tx-container">Loading...</div>
       ) : (
         <div className="tx-container">
-          <h3>General</h3>
+          <h2>Tx: {tx.transactionHash}</h2>
           <div>From: {tx.from}</div>
           <div>To: {tx.to}</div>
           <div>Hash: {tx.transactionHash}</div>

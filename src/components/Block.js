@@ -6,6 +6,15 @@ function Block({ blockNumber, alchemy }) {
   const { url } = useParams();
   const [block, setBlock] = useState(null);
 
+  function toggleTx(e) {
+    const collapsible = e.target.nextElementSibling;
+    if (collapsible.style.display === "flex") {
+      collapsible.style.display = "none";
+    } else {
+      collapsible.style.display = "flex";
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const blockResponse = await alchemy.core.getBlockWithTransactions(
@@ -39,7 +48,18 @@ function Block({ blockNumber, alchemy }) {
           </div>
           <div>Hash: {block.hash}</div>
           <div>Parent Hash: {block.parentHash}</div>
-          <div>Transactions: {block.transactions.length}</div>
+          <div className="log-hash" onClick={(e) => toggleTx(e)}>
+            Transactions: {block.transactions.length}
+          </div>
+          <div className="collapsible">
+            {block.transactions.map((tx, i) => {
+              return (
+                <Link to={"/transactions/" + tx.hash} key={i}>
+                  <div className="tx-item">Hash: {tx.hash}</div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
