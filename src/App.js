@@ -31,8 +31,8 @@ function App() {
         <div className="info-container">
           {blockNumber && (
             <>
-              <LatestBlocks block={blockNumber} />{" "}
-              <LatestTransactions block={blockNumber} />
+              <LatestBlocks block={blockNumber} alchemy={alchemy} />{" "}
+              <LatestTransactions block={blockNumber} alchemy={alchemy} />
             </>
           )}
         </div>

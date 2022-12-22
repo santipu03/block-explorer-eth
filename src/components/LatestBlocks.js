@@ -1,28 +1,20 @@
 import { useEffect, useState } from "react";
-import { Alchemy, Network } from "alchemy-sdk";
 
-const settings = {
-  apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
-  network: Network.ETH_MAINNET,
-};
-
-const alchemy = new Alchemy(settings);
-
-function LatestBlocks(block) {
+function LatestBlocks({ block, alchemy }) {
   const [blocks, setLatestBlocks] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       let blocksArray = [];
       for (let i = 0; i < 10; i++) {
-        const latestBlock = await alchemy.core.getBlock(block.block - i);
+        const latestBlock = await alchemy.core.getBlock(block - i);
         blocksArray.push(latestBlock);
       }
       setLatestBlocks(blocksArray);
     };
 
     fetchData();
-  }, [block.block]);
+  }, [alchemy.core, block]);
 
   return (
     <div className="block-container">

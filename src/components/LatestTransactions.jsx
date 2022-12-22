@@ -1,27 +1,17 @@
 import { useEffect, useState } from "react";
-import { Alchemy, Network } from "alchemy-sdk";
 
-const settings = {
-  apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
-  network: Network.ETH_MAINNET,
-};
-
-const alchemy = new Alchemy(settings);
-
-function LatestTransactions(block) {
+function LatestTransactions({ block, alchemy }) {
   const [txs, setLatestTxs] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const latestBlock = await alchemy.core.getBlockWithTransactions(
-        block.block
-      );
+      const latestBlock = await alchemy.core.getBlockWithTransactions(block);
       console.log(latestBlock);
       setLatestTxs(latestBlock.transactions.slice(0, 10));
     };
 
     fetchData();
-  }, [block.block]);
+  }, [alchemy.core, block]);
 
   return (
     <div className="tx-container">
