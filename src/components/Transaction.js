@@ -1,4 +1,3 @@
-import { Utils } from "alchemy-sdk";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -30,6 +29,7 @@ function Transaction({ alchemy }) {
       ) : (
         <div className="single-tx-container">
           <h2>Transaction Details</h2>
+          {console.log(tx)}
           <div>Hash: {tx.transactionHash}</div>
           <div>
             From: <Link to={"/accounts/" + tx.from}>{tx.from}</Link>
@@ -40,21 +40,17 @@ function Transaction({ alchemy }) {
           <div>
             Block: <Link to={"/block/" + tx.blockNumber}>{tx.blockNumber}</Link>
           </div>
-          <div>
-            Status:{" "}
-            {tx.status === 1 ? <span>Success</span> : <span>Pending...</span>}
-          </div>
+          <div>Status: {tx.status}</div>
           <div>Confirmations: {tx.confirmations}</div>
 
           <h3>Gas</h3>
-          <div>Gas Used: {Utils.formatEther(tx.gasUsed.toString())} ETH</div>
+          <div>Gas Used: {tx.gasUsed.toString()} Wei</div>
           <div>
-            Cumulative Gas Used:{" "}
-            {Utils.formatEther(tx.cumulativeGasUsed.toString())} ETH
+            Cumulative Gas Used: {parseInt(tx.cumulativeGasUsed.toString())} Wei
           </div>
           <div>
             Effective Gas Price:{" "}
-            {Utils.formatEther(tx.effectiveGasPrice.toString())} ETH
+            {parseInt(tx.effectiveGasPrice.toString()) / 10 ** 9} Gwei
           </div>
 
           <h3>Logs</h3>
