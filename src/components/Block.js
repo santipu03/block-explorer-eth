@@ -30,44 +30,90 @@ function Block({ blockNumber, alchemy }) {
       {!block ? (
         <div>Loading...</div>
       ) : (
-        <div className="block-container">
-          {console.log(block)}
-          <h2>Block: {block.number}</h2>
-          <Link to={"/block/" + (block.number - 1)}>
-            <button>Previous</button>
-          </Link>
-          <Link to={"/block/" + (block.number + 1)}>
-            <button>Next</button>
-          </Link>
-          <div>
-            Fee Recipient{" "}
-            <Link to={"/accounts/" + block.miner}>{block.miner}</Link>
+        <>
+          <div className="block-title">
+            <div>Block #{block.number}</div>
+            <div className="buttons-container">
+              <Link to={"/block/" + (block.number - 1)}>
+                <button>Previous</button>
+              </Link>
+              <Link to={"/block/" + (block.number + 1)}>
+                <button>Next</button>
+              </Link>
+            </div>
           </div>
-          <div>Timestamp {block.timestamp}</div>
-          <div>Gas Used: {block.gasUsed.toString()}</div>
-          <div>Gas Limit: {block.gasLimit.toString()} </div>
-          <div>
-            Base Fee Per Gas:{" "}
-            {Utils.formatEther(block.baseFeePerGas.toString())} ETH
+          <div className="tx-block-container">
+            <div className="block-row">
+              <span>Fee Recipient</span>
+              <Link to={"/accounts/" + block.miner}>{block.miner}</Link>
+            </div>
+            <div className="block-row">
+              <span>Timestamp</span> {block.timestamp}
+            </div>
+            <div className="block-row">
+              <span>Gas Used:</span> {block.gasUsed.toString()}
+            </div>
+            <div className="block-row">
+              <span>Gas Limit:</span> {block.gasLimit.toString()}
+            </div>
+            <div className="block-row">
+              <span>Base Fee Per Gas:</span>
+              {Utils.formatEther(block.baseFeePerGas.toString())} ETH
+            </div>
+            <div className="block-row">
+              <span>Hash:</span> {block.hash}
+            </div>
+            <div className="block-row">
+              <span>Parent Hash: </span>
+              <Link to={"/block/" + (block.number - 1)}>
+                {block.parentHash}
+              </Link>
+            </div>
+            <div className="tx-per-block" onClick={(e) => toggleTx(e)}>
+              Transactions: {block.transactions.length}
+            </div>
+            <div className="collapsible">
+              {block.transactions.map((tx, i) => {
+                return (
+                  <div className="row" key={i}>
+                    <Link to={"/transactions/" + tx.hash}>
+                      <div className="link">{tx.hash.substring(0, 11)}...</div>
+                    </Link>
+                    <div>
+                      <div>
+                        From{" "}
+                        <Link to={"/accounts/" + tx.from}>
+                          <span className="link">
+                            {tx.from.substring(0, 11)}...
+                          </span>
+                        </Link>
+                      </div>
+                      <div>
+                        To{" "}
+                        <Link to={"/accounts/" + tx.to}>
+                          {tx.to === null ? (
+                            <div className="link">0x000000000</div>
+                          ) : (
+                            <span className="link">
+                              {tx.to.substring(0, 11)}
+                            </span>
+                          )}
+                          ...
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="value">
+                      {tx.value.toString() !== "0"
+                        ? (tx.value.toString() / 10 ** 18).toFixed(5)
+                        : tx.value.toString() / 10 ** 18}{" "}
+                      ETH
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div>Hash: {block.hash}</div>
-          <div>
-            Parent Hash:{" "}
-            <Link to={"/block/" + (block.number - 1)}>{block.parentHash}</Link>
-          </div>
-          <div className="log-hash" onClick={(e) => toggleTx(e)}>
-            Transactions: {block.transactions.length}
-          </div>
-          <div className="collapsible">
-            {block.transactions.map((tx, i) => {
-              return (
-                <Link to={"/transactions/" + tx.hash} key={i}>
-                  <div className="tx-item">Hash: {tx.hash}</div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+        </>
       )}
     </div>
   );

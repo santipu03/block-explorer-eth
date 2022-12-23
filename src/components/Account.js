@@ -28,15 +28,12 @@ function Account({ alchemy }) {
   }, [alchemy.core, url]);
 
   return (
-    <div className="App">
-      <h1>
-        <strong>Account Details</strong>
-      </h1>
-      <div className="main">
-        <div className="card">
+    <div>
+      <div className="account-info">
+        <div>
           <strong>Address:</strong>&nbsp;{url}
         </div>
-        <div className="card">
+        <div>
           <strong>Balance:</strong>&nbsp;{account}&nbsp; ETH
         </div>
       </div>
