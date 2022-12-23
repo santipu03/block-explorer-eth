@@ -7,7 +7,7 @@ a {
 }
 
 a:visited {
-  color: blue;
+  color: #3498db;
 }
 
 .App {
@@ -16,17 +16,53 @@ a:visited {
 
 header {
   height: 100px;
-  background-color: #fef3c7;
   display: flex;
-  padding-left: 60px;
+  padding: 0 60px;
+  border-bottom: 1px solid #e7eaf3;
   font-weight: bold;
   font-size: 2rem;
   align-items: center;
+  justify-content: space-between;
   color: black;
+}
+
+.searchbar-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.searchbar-container a {
+  display: flex;
+  align-items: center;
+}
+
+input {
+  padding: 10px;
+  height: 54px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+button {
+  padding: 10px;
+  height: 54px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d4ed8;
 }
 
 a.title {
   color: black;
+}
+a {
+  color: #1e40af;
 }
 
 .body {
@@ -34,14 +70,16 @@ a.title {
   display: flex;
   flex-direction: column;
   padding: 60px;
+  background-color: #f8f9fa;
 }
 
 footer {
   height: 60px;
-  background-color: #fef3c7;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #21325b;
+  color: white;
 }
 
 .info-container {
@@ -68,6 +106,10 @@ footer {
 .txns-container {
   overflow-y: scroll;
   border: 2px solid black;
+}
+
+.txns-container > .row > div {
+  width: 200px;
 }
 
 .block-container {
@@ -126,6 +168,10 @@ footer {
   padding: 10px;
   height: 80px;
   border: 2px solid black;
+}
+
+.row > * {
+  width: 220px;
 }
 
 .value {

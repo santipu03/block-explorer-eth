@@ -22,7 +22,7 @@ function LatestTransactions({ block, alchemy }) {
             return (
               <div className="row" key={i}>
                 <Link to={"/transactions/" + tx.hash}>
-                  <div>{tx.hash.substring(0, 11)}...</div>
+                  <div className="link">{tx.hash.substring(0, 11)}...</div>
                 </Link>
                 <div>
                   <div>

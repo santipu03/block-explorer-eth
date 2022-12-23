@@ -1,6 +1,6 @@
 import { Utils } from "alchemy-sdk";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function Account({ alchemy }) {
   const { url } = useParams();
@@ -12,12 +12,15 @@ function Account({ alchemy }) {
       const balance = Utils.formatEther(
         await alchemy.core.getBalance(url, "latest")
       );
+      console.log(url);
       const transfers = await alchemy.core.getAssetTransfers({
         fromBlock: "0x0",
-        url,
+        toBlock: "latest",
+        excludeZeroValue: true,
+        fromAdress: "0xc15C5736Fb8DFFd4553fd5FbCaa7C95400D63a06",
         category: ["external", "internal", "erc20", "erc721", "erc1155"],
       });
-      console.log(transfers.transfers);
+      console.log(transfers);
       setAccount(balance);
       setLatestTx(transfers.transfers.slice(transfers.transfers.length - 15));
     };
@@ -45,9 +48,24 @@ function Account({ alchemy }) {
           latestTx.map((tx, i) => {
             return (
               <div className="row" key={i}>
-                <div>{tx.hash.substring(0, 11)}...</div>
+                <div>
+                  <Link to={"/transactions/" + tx.hash}>
+                    {tx.hash.substring(0, 11)}...
+                  </Link>
+                </div>
+                <div>
+                  Block:{" "}
+                  <Link to={"/block/" + parseInt(tx.blockNum).toString()}>
+                    {parseInt(tx.blockNum).toString()}
+                  </Link>
+                </div>
                 <div>From: {tx.from.substring(0, 11)}...</div>
-                <div>To: {tx.to.substring(0, 11)}...</div>
+                <div>
+                  To:{" "}
+                  <Link to={"/accounts/" + tx.to}>
+                    {tx.to.substring(0, 11)}...
+                  </Link>
+                </div>
                 <div className="value">
                   {tx.value.toString() !== "0"
                     ? parseInt(tx.value.toString()).toFixed(5)

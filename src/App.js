@@ -1,10 +1,11 @@
 import { Alchemy, Network } from "alchemy-sdk";
 import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
 import Account from "./components/Account";
 import Transaction from "./components/Transaction";
 import Block from "./components/Block";
+import Header from "./components/Header";
 
 import "./App.css";
 
@@ -20,11 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <Link to={"/"} className="title">
-          Ethereum Block Explorer
-        </Link>
-      </header>
+      <Header />
       <div className="body">
         <Routes>
           <Route

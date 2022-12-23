@@ -36,7 +36,7 @@ function LatestBlocks({ block, alchemy }) {
                     </span>
                   </Link>
                 </div>
-                <div>{block.transactions.length} txns</div>
+                <div className="value">{block.transactions.length} txns</div>
               </div>
             );
           })
