@@ -5,6 +5,10 @@
 This project is part of the program of [Alchemy University](https://university.alchemy.com/).
 Here are the main instructions.
 
+## Demo
+
+A demo of this project can be found [here](https://block-explorer-eth.vercel.app/)
+
 ## Instructions
 
 The lessons this week covered the Ethereum JSON-RPC API and the `ethers.js` library giving us the ability to query the Ethereum blockchain and make transactions!
