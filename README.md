@@ -1,12 +1,3 @@
-## Todo
-
-- Query txns for every account
-
-  - Correct block number in that
-
-- Improve Styling
-- Search bar
-
 # Ethereum Block Explorer
 
 The lessons this week covered the Ethereum JSON-RPC API and the `ethers.js` library giving us the ability to query the Ethereum blockchain and make transactions!
