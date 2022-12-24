@@ -1,5 +1,5 @@
 import { Alchemy, Network } from "alchemy-sdk";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
 import Account from "./components/Account";
@@ -18,6 +18,17 @@ const alchemy = new Alchemy(settings);
 
 function App() {
   const [blockNumber, setBlockNumber] = useState();
+  const [blocks, setLatestBlocks] = useState(null);
+  const [txs, setLatestTxs] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const block = await alchemy.core.getBlockNumber();
+      setBlockNumber(block);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="App">
@@ -30,7 +41,10 @@ function App() {
               <Main
                 blockNumber={blockNumber}
                 alchemy={alchemy}
-                setBlockNumber={setBlockNumber}
+                blocks={blocks}
+                setLatestBlocks={setLatestBlocks}
+                txs={txs}
+                setLatestTxs={setLatestTxs}
               />
             }
           />

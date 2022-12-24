@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function LatestTransactions({ block, alchemy }) {
-  const [txs, setLatestTxs] = useState(null);
-
+function LatestTransactions({ block, alchemy, txs, setLatestTxs }) {
   useEffect(() => {
     const fetchData = async () => {
       const latestBlock = await alchemy.core.getBlockWithTransactions(block);
       setLatestTxs(latestBlock.transactions.slice(0, 10));
     };
 
-    fetchData();
-  }, [alchemy.core, block]);
+    if (!txs) {
+      fetchData();
+    }
+  }, [alchemy.core, block, setLatestTxs, txs]);
 
   return (
     <div className="latest-container">

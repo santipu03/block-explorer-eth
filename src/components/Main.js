@@ -1,24 +1,31 @@
 import LatestTransactions from "./LatestTransactions";
-import { useEffect } from "react";
 
 import LatestBlocks from "./LatestBlocks";
 
-function Main({ blockNumber, alchemy, setBlockNumber }) {
-  useEffect(() => {
-    const fetchData = async () => {
-      const block = await alchemy.core.getBlockNumber();
-      setBlockNumber(block);
-    };
-
-    fetchData();
-  }, [alchemy.core, setBlockNumber]);
-
+function Main({
+  blockNumber,
+  alchemy,
+  blocks,
+  setLatestBlocks,
+  txs,
+  setLatestTxs,
+}) {
   return (
     <div className="info-container">
       {blockNumber && (
         <>
-          <LatestBlocks block={blockNumber} alchemy={alchemy} />{" "}
-          <LatestTransactions block={blockNumber} alchemy={alchemy} />
+          <LatestBlocks
+            block={blockNumber}
+            alchemy={alchemy}
+            blocks={blocks}
+            setLatestBlocks={setLatestBlocks}
+          />{" "}
+          <LatestTransactions
+            block={blockNumber}
+            alchemy={alchemy}
+            txs={txs}
+            setLatestTxs={setLatestTxs}
+          />
         </>
       )}
     </div>

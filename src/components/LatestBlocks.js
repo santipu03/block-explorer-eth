@@ -1,21 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-function LatestBlocks({ block, alchemy }) {
-  const [blocks, setLatestBlocks] = useState(null);
+function LatestBlocks({ block, alchemy, blocks, setLatestBlocks }) {
+  const componentMounted = useRef(true);
 
   useEffect(() => {
+    let blocksArray = [];
     const fetchData = async () => {
-      let blocksArray = [];
       for (let i = 0; i < 10; i++) {
         const latestBlock = await alchemy.core.getBlock(block - i);
         blocksArray.push(latestBlock);
       }
-      setLatestBlocks(blocksArray);
+      if (componentMounted.current) {
+        setLatestBlocks(blocksArray);
+      }
     };
 
-    fetchData();
-  }, [alchemy.core, block]);
+    if (!blocks) {
+      fetchData();
+    }
+
+    return () => {
+      componentMounted.current = false;
+    };
+  }, [alchemy.core, block, blocks, setLatestBlocks]);
 
   return (
     <div className="latest-container">

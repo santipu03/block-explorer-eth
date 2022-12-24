@@ -20,7 +20,6 @@ function Transaction({ alchemy }) {
       ) : (
         <>
           <div className="tx-block-container">
-            {console.log(tx)}
             <div className="block-row">
               <span>Hash:</span> {tx.transactionHash}
             </div>
